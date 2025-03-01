@@ -1,4 +1,4 @@
-name: Build Kernel op6 los22.1 with KSU and SUSFS
+name: Build Kernel OnePlus 6 (los22.1) with KSU and SUSFS
 on:
   workflow_call:
   workflow_dispatch:
