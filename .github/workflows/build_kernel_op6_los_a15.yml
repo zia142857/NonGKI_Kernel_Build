@@ -184,23 +184,12 @@ jobs:
           echo "PACK_METHOD=MKBOOTIMG" >> $GITHUB_ENV
 
           # Set SUSFS
-          git clone $SUSFS_SOURCE -b $SUSFS_BRANCH susfs4ksu --depth=1
-          git clone https://github.com/JackA1ltman/NonGKI_Kernel_Patches.git -b mi_kernel NonGKI_Kernel_Patches --depth=1
-          cp susfs4ksu/kernel_patches/fs/* fs/
-          cp susfs4ksu/kernel_patches/include/linux/* include/linux/
+          #git clone $SUSFS_SOURCE -b $SUSFS_BRANCH susfs4ksu --depth=1
+          #git clone https://github.com/JackA1ltman/NonGKI_Kernel_Patches.git -b mi_kernel NonGKI_Kernel_Patches --depth=1
+          #cp susfs4ksu/kernel_patches/fs/* fs/
+          #cp susfs4ksu/kernel_patches/include/linux/* include/linux/
 
-      - name: Patch Kernel for no-kprobe
-        run: |
-          cd $GITHUB_WORKSPACE/device_kernel
-          if [[ -d "NonGKI_Kernel_Patches" ]]; then
-            echo "Folder existed."
-          else
-            git clone https://github.com/JackA1ltman/NonGKI_Kernel_Patches.git -b mi_kernel NonGKI_Kernel_Patches
-          fi
 
-          cp NonGKI_Kernel_Patches/patches.sh ./
-
-          bash patches.sh
 
       - name: Extra Kernel Options
         run: |
@@ -211,9 +200,9 @@ jobs:
         if: env.SUSFS_ENABLE == 'true'
         run: |
           cd $GITHUB_WORKSPACE/device_kernel/
-          cp susfs4ksu/kernel_patches/50_add_susfs_in_kernel-${{ env.KERNEL_VERSION }}.patch ./
+          #cp susfs4ksu/kernel_patches/50_add_susfs_in_kernel-${{ env.KERNEL_VERSION }}.patch ./
 
-          patch -p1 < 50_add_susfs_in_kernel-${{ env.KERNEL_VERSION }}.patch || true
+          #patch -p1 < 50_add_susfs_in_kernel-${{ env.KERNEL_VERSION }}.patch || true
 
           if [[ ${{ env.KERNELSU_NAME }}  == "KernelSU-Next" ]]; then
             if [[ ${{ env.KERNELSU_SOURCE }} =~ ".sh" ]]; then
